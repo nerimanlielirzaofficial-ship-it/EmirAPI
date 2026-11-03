@@ -1,0 +1,33 @@
+name: Build Emir AI Studio APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kodları indir
+        uses: actions/checkout@v4
+
+      - name: Java kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: APK oluştur
+        run: gradle assembleDebug
+
+      - name: APK dosyasını kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: Emir-AI-Studio-debug
+          path: app/build/outputs/apk/debug/*.apk
