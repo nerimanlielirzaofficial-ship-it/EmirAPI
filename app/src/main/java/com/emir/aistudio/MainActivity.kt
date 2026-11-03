@@ -53,7 +53,7 @@ class MainActivity:ComponentActivity(){
  }
  private suspend fun groq(key:String,prompt:String)=withContext(Dispatchers.IO){
   val sys="""Sen profesyonel Türkçe 2D mobil simülasyon çizgi film senaristisin. Kullanıcı fikrini koru. Sevimli yuvarlak kafalı 2D karakterler, kalın siyah kontur, sade renkli arka plan, yandan sabit kamera, mobil oyun HUD. Bütün diyaloglar ve yazılar Türkçe. Karakter görünüşlerini tutarlı tarif et. Tek akıcı 6-10 saniyelik sahne için ayrıntılı video promptu yaz. Yalnızca promptu döndür."""
-  val body=JSONObject().put("model","llama-3.3-70b-versatile").put("temperature",0.75)
+  val body=JSONObject().put("model","openai/gpt-oss-120b").put("temperature",0.75)
    .put("messages",JSONArray().put(JSONObject().put("role","system").put("content",sys))
    .put(JSONObject().put("role","user").put("content",prompt)))
   val r=post("https://api.groq.com/openai/v1/chat/completions",body,"Bearer $key")
