@@ -76,7 +76,7 @@ class MainActivity:ComponentActivity(){
  }
  private fun post(url:String,body:JSONObject,auth:String?):JSONObject{
   val c=URL(url).openConnection() as HttpURLConnection
-  try{c.requestMethod="POST";c.connectTimeout=30000;c.readTimeout=300000;c.doOutput=true
+  return try{c.requestMethod="POST";c.connectTimeout=30000;c.readTimeout=300000;c.doOutput=true
    c.setRequestProperty("Content-Type","application/json");if(auth!=null)c.setRequestProperty("Authorization",auth)
    c.outputStream.use{it.write(body.toString().toByteArray(Charsets.UTF_8))}
    val code=c.responseCode;val stream=if(code in 200..299)c.inputStream else c.errorStream
